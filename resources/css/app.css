@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    line-height: 1.75; /* 行間を少し広げる */
+}
