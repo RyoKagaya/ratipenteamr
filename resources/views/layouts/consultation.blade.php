@@ -28,12 +28,12 @@
                     専門家がしっかりサポートします。
                 </p>
                 <div class="flex flex-col md:flex-row justify-center gap-6 mt-8">
-                    <a href="{{ route('consultations.chooseCategory') }}"
+                    <a href="{{ route('consultations.choose-category') }}"
                         class="bg-blue-500 text-white text-lg font-bold py-4 px-6 rounded-lg shadow-md
                         hover:bg-blue-600 transition text-center">
                         業務内容を選んで相談する
                     </a>
-                    <a href="{{ route('consultations.chooseExpert') }}"
+                    <a href="{{ route('consultations.choose-expert') }}"
                         class="bg-blue-500 text-white text-lg font-bold py-4 px-6 rounded-lg shadow-md
                         hover:bg-blue-600 transition text-center">
                         専門家に相談する
@@ -214,13 +214,13 @@
 
                     <div class="flex flex-col md:flex-row justify-center gap-6 mt-8">
                         <!-- 「業務内容を選んで相談する」ボタン -->
-                        <a href="{{ route('consultations.chooseCategory') }}"
+                        <a href="{{ route('consultations.choose-category') }}"
                         class="px-6 py-3 bg-white text-blue-500 font-semibold rounded-full text-lg shadow-lg border border-white transition hover:bg-gray-100">
                             業務内容を選んで相談する
                         </a>
 
                         <!-- 「専門家に相談する」ボタン -->
-                        <a href="{{ route('consultations.chooseExpert') }}"
+                        <a href="{{ route('consultations.choose-expert') }}"
                         class="px-6 py-3 bg-orange-500 text-white font-semibold rounded-full text-lg shadow-lg transition hover:bg-orange-600">
                             専門家に相談する
                         </a>

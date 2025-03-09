@@ -22,14 +22,14 @@
                 @endphp
 
                 <!-- 青い丸のアイコン -->
-                <div class="w-6 h-6 bg-blue-400 text-white flex items-center justify-center rounded-full mr-2">
+                <div class="w-6 h-6 bg-blue-500 text-white flex items-center justify-center rounded-full mr-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         {!! $iconPath !!}
                     </svg>
                 </div>
 
                 <!-- タイトル -->
-                <h1 class="text-lg font-bold text-gray-500 dark:text-gray-200">
+                <h1 class="text-base font-bold text-gray-600 dark:text-gray-200">
                     @if(request()->routeIs('dashboard'))
                         ダッシュボード
                     @elseif(request()->routeIs('chats.index'))

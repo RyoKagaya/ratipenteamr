@@ -77,7 +77,12 @@
         </li>
 
         <!-- 設定 -->
-        <li class="pl-3 py-2 hover:bg-blue-300 rounded-md cursor-pointer">設定</li>
+        <li>
+            <a href="{{ route('profile.edit') }}" class="block pl-3 py-2 hover:bg-blue-300 rounded-md cursor-pointer">
+                設定
+            </a>
+        </li>
+
     </ul>
 </div>
 
