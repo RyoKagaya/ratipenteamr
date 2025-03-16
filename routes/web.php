@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\ConsultationsController;
+use App\Http\Controllers\CreditController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -12,17 +13,9 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/consultations', function () {
-    return view('consultations.index');
-})->name('consultations.index');
-
-Route::get('/consultations/choose-expert', function () {
-    return view('consultations.choose-expert');
-})->name('consultations.choose-expert');
-
-Route::get('/consultations/choose-category', function () {
-    return view('consultations.choose-category');
-})->name('consultations.choose-category');
+Route::get('/consultations', [ConsultationsController::class, 'index'])->name('consultations.index');
+Route::get('/consultations/choose-expert', [ConsultationsController::class, 'chooseExpert'])->name('consultations.choose-expert');
+Route::get('/consultations/choose-category', [ConsultationsController::class, 'chooseCategory'])->name('consultations.choose-category');
 
 // チャット関連
 Route::get('/chats', [ChatsController::class, 'index'])->name('chats.index');
@@ -51,11 +44,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // タスクの削除
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
+    // タスクの編集
+    Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+
+    // タスクの更新
+    Route::put('/tasks/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
     // プロフィール管理
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/credits/purchase', [CreditController::class, 'purchaseCredits'])->name('credits.purchase');
+});
+
+// ユーザーのクレジット情報を取得するAPI
+Route::get('/user/credits', [TaskController::class, 'getCredits'])->name('user.credits');
 
 // ログアウト処理
 Route::post('/logout', function () {

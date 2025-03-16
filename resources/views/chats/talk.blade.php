@@ -34,6 +34,7 @@
             const chatForm = document.getElementById("chat-form");
             const chatInput = document.getElementById("chat-input");
             const chatBox = document.getElementById("chat-box");
+            let conversationId = null; // 💡 連続会話のための conversation_id を保持
 
             chatForm.addEventListener("submit", async function (event) {
                 event.preventDefault();
@@ -54,13 +55,21 @@
                             "Content-Type": "application/json",
                             "X-CSRF-TOKEN": "{{ csrf_token() }}",
                         },
-                        body: JSON.stringify({ user_message: userMessage }),
+                        body: JSON.stringify({
+                            user_message: userMessage,
+                            conversation_id: conversationId // 💡 既存の会話 ID を送信
+                        }),
                     });
 
                     const data = await response.json();
 
                     if (data.reply) {
                         addMessage(data.reply, false);
+                    }
+
+                     // 💡 新しい conversation_id を取得し、次のリクエストに利用
+                    if (data.conversation_id) {
+                        conversationId = data.conversation_id;
                     }
                 } catch (error) {
                     console.error("Error:", error);
@@ -83,7 +92,7 @@
                 textDiv.classList.add("p-3", "rounded-lg", "inline-block", "relative");
 
                 if (isUser) {
-                    textDiv.classList.add("bg-gray-100", "text-right", "max-w-md");
+                    textDiv.classList.add("bg-gray-100", "text-left", "max-w-md");
                 } else {
                     textDiv.classList.add("bg-gray-50", "text-left", "max-w-lg", "relative");
                 }
@@ -94,7 +103,7 @@
                 if (!isUser) {
                     const iconDiv = document.createElement("div");
                     iconDiv.classList.add("w-12", "h-12", "rounded-full", "bg-cover", "mr-2", "shrink-0");
-                    iconDiv.style.backgroundImage = `url('{{ asset('img/Ratipen_nothing.png') }}')`;
+                    iconDiv.style.backgroundImage = `url('{{ asset('img/Ratipen_face.png') }}')`;
 
                     messageDiv.appendChild(iconDiv);
                 }

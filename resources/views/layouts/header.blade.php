@@ -1,4 +1,5 @@
 <header x-data="{ open: false }" class="fixed top-0 left-[16.666%] w-[83.333%] bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700 z-50">
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-12 items-center">
             <!-- 左側ナビゲーション -->
@@ -22,23 +23,25 @@
                 @endphp
 
                 <!-- 青い丸のアイコン -->
-                <div class="w-6 h-6 bg-blue-500 text-white flex items-center justify-center rounded-full mr-2">
+                <div
+                class="w-6 h-6 bg-blue-500 text-white flex items-center justify-center rounded-full mr-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         {!! $iconPath !!}
                     </svg>
                 </div>
 
                 <!-- タイトル -->
-                <h1 class="text-base font-bold text-gray-600 dark:text-gray-200">
+                <h1
+                    class="text-base font-bold text-gray-600 dark:text-gray-200">
                     @if(request()->routeIs('dashboard'))
                         ダッシュボード
                     @elseif(request()->routeIs('chats.index'))
                         Ratipen
                     @elseif(request()->routeIs('consultations.index'))
                         困ったときの相談窓口
-                    @elseif(request()->routeIs('consultations.chooseExpert'))
+                    @elseif(request()->routeIs('consultations.choose-expert'))
                         困ったときの相談窓口
-                    @elseif(request()->routeIs('consultations.chooseCategory'))
+                    @elseif(request()->routeIs('consultations.choose-category'))
                         困ったときの相談窓口
                     @elseif(request()->routeIs('profile.edit'))
                         プロフィール
@@ -54,6 +57,7 @@
 
                 <!-- 困ったときの相談窓口ボタン -->
                 <a href="{{ route('consultations.index') }}"
+                    :class="showModal ? 'bg-gray-700 text-white' : 'bg-orange-400 text-white'"
                     class="bg-orange-400 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition">
                     困ったときの相談窓口
                 </a>
@@ -77,7 +81,9 @@
                 <!-- ユーザー設定 -->
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button
+                            :class="showModal ? 'bg-gray-700 text-white' : 'bg-white text-gray-500'"
+                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                             <div>{{ Auth::user()->name }}</div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -107,3 +113,5 @@
         </div>
     </div>
 </header>
+
+
